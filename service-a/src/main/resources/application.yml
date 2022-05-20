@@ -1,0 +1,10 @@
+server:
+  port: 1357
+
+spring:
+  application:
+    name: service-a
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server1/eureka/,http://eureka-server2/eureka/,http://eureka-server3/eureka/

@@ -1,0 +1,52 @@
+eureka:
+  server:
+    enable-self-preservation: false
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+
+spring:
+  application:
+    name: eureka-server
+
+
+---
+spring:
+  profiles: zone1
+eureka:
+  instance:
+    hostname: eureka-server1
+  client:
+    service-url:
+      defaultZone: http://eureka-server2/eureka/,http://eureka-server3/eureka/,http://eureka-server1/eureka/
+#      defaultZone: http://localhost:8014/eureka/,http://localhost:8015/eureka/,http://localhost:8013/eureka/
+server:
+  port: 8013
+
+
+---
+spring:
+  profiles: zone2
+eureka:
+  instance:
+    hostname: eureka-server2
+  client:
+    service-url:
+      defaultZone: http://eureka-server1/eureka/,http://eureka-server3/eureka/,http://eureka-server2/eureka/
+#      defaultZone: http://localhost:8013/eureka/,http://localhost:8015/eureka/,http://localhost:8014/eureka/
+server:
+  port: 8014
+
+
+---
+spring:
+  profiles: zone3
+eureka:
+  instance:
+    hostname: eureka-server3
+  client:
+    service-url:
+      defaultZone: http://eureka-server1/eureka/,http://eureka-server2/eureka/,http://eureka-server3/eureka/
+#      defaultZone: http://localhost:8013/eureka/,http://localhost:8014/eureka/,http://localhost:8015/eureka/
+server:
+  port: 8015
