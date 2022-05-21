@@ -4,7 +4,36 @@ server:
 spring:
   application:
     name: service-a
+  profiles:
+    active: dev
+eureka:
+  instance:
+    instance-id: ${eureka.instance.hostname}:${server.port}[${spring.cloud.client.ip-address}]
+    hostname: service-a
+
+eureka-server:
+  port: 8013
+
+
+
+---
+spring:
+  profiles: dev
+
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka-server1/eureka/,http://eureka-server2/eureka/,http://eureka-server3/eureka/
+      defaultZone: http://localhost:${eureka-server.port}/eureka/
+  instance:
+    hostname: localhost
+
+
+
+---
+spring:
+  profiles: qa
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server1:${eureka-server.port}/eureka/,http://eureka-server2:${eureka-server.port}/eureka/,http://eureka-server3:${eureka-server.port}/eureka/
