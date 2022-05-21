@@ -35,7 +35,7 @@ spring:
 
 eureka:
   client:
-    register-with-eureka: true
-    fetch-registry: true
+    register-with-eureka: false
+    fetch-registry: false
     service-url:
-      defaultZone: http://eureka-server1:${server.port}/eureka/,http://eureka-server2:${server.port}/eureka/,http://eureka-server3:${server.port}/eureka/
+      defaultZone: http://eureka-server1:${server.port}/eureka/
