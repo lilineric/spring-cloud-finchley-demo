@@ -14,6 +14,7 @@
         <module>service-feign</module>
         <module>service-zuul</module>
         <module>service-turbine</module>
+        <module>service-gateway</module>
     </modules>
     <packaging>pom</packaging>
 

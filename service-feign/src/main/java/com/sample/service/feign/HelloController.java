@@ -13,6 +13,6 @@ public class HelloController {
 
     @GetMapping("/hello")
     public String home(@RequestParam(value = "name") String name) {
-        return serviceHello.sayHelloFromServiceA(name);
+        return serviceHello.sayHelloFromServiceA(name) + " from feign";
     }
 }
