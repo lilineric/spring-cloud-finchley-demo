@@ -12,6 +12,8 @@
         <module>service-a</module>
         <module>service-b</module>
         <module>service-feign</module>
+        <module>service-zuul</module>
+        <module>service-turbine</module>
     </modules>
     <packaging>pom</packaging>
 

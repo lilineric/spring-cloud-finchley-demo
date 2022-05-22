@@ -1,5 +1,6 @@
 package com.sample.service.a;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +16,12 @@ public class HelloController {
 
 
     @GetMapping("/hello")
-    public String home(@RequestParam(value = "name") String name) {
+    @HystrixCommand(fallbackMethod = "helloFallback")
+    public String hello(@RequestParam(value = "name") String name) {
         return "hello " + name + " ! I'm " + applicationName + "! I'm from " + instanceId;
+    }
+
+    public String helloFallback(String name) {
+        return "ERROR! " + name + " ! I'm " + applicationName + "! I'm from " + instanceId;
     }
 }

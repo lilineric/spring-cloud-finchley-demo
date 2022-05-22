@@ -1,25 +1,40 @@
 server:
-  port: 1357
+  port: 1757
 
 spring:
   application:
-    name: service-a
+    name: service-turbine
   profiles:
     active: dev
 eureka:
   instance:
     instance-id: ${eureka.instance.hostname}:${server.port}[${spring.cloud.client.ip-address}]
-    hostname: service-a
+    hostname: service-turbine
 
 eureka-server:
   port: 8013
 
+feign:
+  hystrix:
+    enabled: true
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+
+turbine:
+  app-config: service-a, service-b, service-zuul, service-feign
+  aggregator:
+    clusterConfig: default
+  clusterNameExpression: new String("default")
+  combine-host: true
+  instanceUrlSuffix:
+    default: actuator/hystrix.stream
 
 ---
 spring:
